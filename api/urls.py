@@ -10,7 +10,7 @@ router.register(r"tags", views.TagViewSet)
 router.register(r"category", views.CategoryViewSet)
 router.register(r"newsletters", views.NewsLettersViewSet)
 router.register(r"contact", views.ContactViewSet)
-router.register(r"post", views.PostViewSet)
+router.register(r"post", views.PostViewSet, basename="api-post")
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
