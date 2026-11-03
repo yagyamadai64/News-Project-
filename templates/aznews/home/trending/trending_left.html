@@ -1,0 +1,44 @@
+<div class="col-lg-8">
+  {% if single_trending_post %}
+  <!-- Trending Top -->
+  <div class="trending-top mb-30">
+    <div class="trend-top-img">
+      <img
+        src="{{ single_trending_post.image.url }}"
+        alt=""
+        style="height: 450px"
+      />
+      <div class="trend-top-cap">
+        <span>{{ single_trending_post.category }}</span>
+        <h2>
+          <a href="{% url 'post-details' single_trending_post.pk %}"
+            >{{ single_trending_post.title|truncatechars:80 }}</a
+          >
+        </h2>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+  <!-- Trending Bottom -->
+  <div class="trending-bottom">
+    <div class="row">
+      {% for button in button_trending %}
+      <div class="col-lg-4">
+        <div class="single-bottom mb-35">
+          <div class="trend-bottom-img mb-30">
+            <img src="{{ button.image.url }}" alt="" />
+          </div>
+          <div class="trend-bottom-cap">
+            <span class="color1">{{ button.category }}</span>
+            <h4>
+              <a href="{% url 'post-details' button.pk %}"
+                >{{ button.title|truncatechars:45 }}</a
+              >
+            </h4>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>

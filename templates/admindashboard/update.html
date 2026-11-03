@@ -1,0 +1,21 @@
+{% extends 'admindashboard/base.html' %} {% block content %}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <h1 class="text-3xl font-bold text-center mb-8 text-gray-800">Todo Update</h1>
+  <form method="post" class="flex gap-2 mb-6">
+    {% csrf_token %}
+    <input
+      type="text"
+      name="title"
+      value="{{ todo.title }}"
+      placeholder="Add your todo..."
+      class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+    />
+    <button
+      type="submit"
+      class="px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition"
+    >
+      Save
+    </button>
+  </form>
+</div>
+{% endblock %}

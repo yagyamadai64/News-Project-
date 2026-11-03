@@ -1,0 +1,38 @@
+{% for data in posts %}
+<article class="blog_item">
+  <div class="blog_item_img">
+    <img
+      class="card-img rounded-0"
+      src="{{ data.image.url }}"
+      alt=""
+      style="height: 450px"
+    />
+    <a href="{% url 'post-details' data.pk %}" class="blog_item_date">
+      <h3>{{ data.published_at|date:'j' }}</h3>
+      <p>{{ data.published_at|date:'M' }}</p>
+    </a>
+  </div>
+
+  <div class="blog_details">
+    <a class="d-inline-block" href="{% url 'post-details' data.pk %}"
+      ><h2>{{ data.title }}</h2></a
+    >
+    <p>{{ data.content|truncatechars:300 }}</p>
+    <ul class="blog-info-link">
+      <li>
+        <a href="#"><i class="fa fa-user"></i> {{ data.tag.all|join:', ' }}</a>
+      </li>
+      <li>
+        <a href="#"
+          ><i class="fa fa-comments"></i> {{ data.comment_set.count }}
+          Comments</a
+        >
+      </li>
+    </ul>
+  </div>
+</article>
+{% empty %}
+<div class="alert alert-info" role="status">
+  No published news articles are available yet.
+</div>
+{% endfor %}

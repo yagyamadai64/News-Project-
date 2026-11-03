@@ -1,0 +1,26 @@
+{% extends 'admindashboard/base.html' %}
+{% block title %}
+  Post App List
+{% endblock %}
+{% block content %}
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h1 class="text-3xl font-bold text-center mb-8 text-gray-800">My Post</h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {% for post in posts %}
+        <div class="p-1 pt-3 bg-white border border-gray-200 hover:-translate-y-1 transition duration-300 rounded-lg shadow shadow-black/10 w-full">
+          <img class="rounded-md max-h-40 w-full object-cover" src="{{ post.image.url }}" alt="{{ post.title }}"
+          />
+          <a href="{% url 'news_admin:post_detail' post.id %}" class="text-gray-900 text-xl font-semibold ml-2 mt-4 line-clamp-2">{{ post.title }}</a>
+          <p class="text-zinc-400 text-sm/6 mt-2 ml-2 mb-2">{{ post.content|truncatechars:200 }}</p>
+          <div class="flex justify-between">
+            <span class="text-zinc-400 text-sm/8 mt-2 ml-2 mb-2 capitalize">{{ post.author }}</span>
+            <span class="text-zinc-400 text-sm/8 mt-2 ml-2 mb-2 capitalize">{{ post.published_at|date:'F j, Y' }}</span>
+          </div>
+        </div>
+      {% empty %}
+        <div class="col-span-ful text-center text-gray-500 text-lg">No posts available</div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

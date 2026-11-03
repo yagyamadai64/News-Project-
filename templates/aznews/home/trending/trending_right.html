@@ -1,0 +1,13 @@
+<div class="col-lg-4">
+  {% for button in button_right %}
+    <div class="trand-right-single d-flex">
+      <div class="trand-right-img">
+        <img src="{{ button.image.url }}" alt="" width="170" />
+      </div>
+      <div class="trand-right-cap">
+        <span class="color1">{{ button.category.name }}</span>
+        <h4><a href="{% url 'post-details' button.pk %}">{{ button.title|truncatechars:45 }}</a></h4>
+      </div>
+    </div>
+  {% endfor %}
+</div>

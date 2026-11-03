@@ -1,0 +1,37 @@
+{% if weekly_top_posts %}
+<div class="weekly-news-area pt-50">
+  <div class="container">
+    <div class="weekly-wrapper">
+      <!-- section Tittle -->
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="section-tittle mb-30">
+            <h3>Weekly Top News</h3>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="weekly-news-active dot-style d-flex dot-style">
+            {% for data in weekly_top_posts %}
+            <div class="weekly-single">
+              <div class="weekly-img">
+                <img src="{{ data.image.url }}" alt="" height="250" />
+              </div>
+              <div class="weekly-caption">
+                <span class="color1">{{ data.category.name }}</span>
+                <h4>
+                  <a href="{% url 'post-details' data.pk %}"
+                    >{{ data.title|truncatechars:50 }}</a
+                  >
+                </h4>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}

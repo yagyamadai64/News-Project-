@@ -1,0 +1,15 @@
+<aside class="single_sidebar_widget popular_post_widget">
+  <h3 class="widget_title">Recent Post</h3>
+
+  {% for data in recent_posts %}
+    <div class="media post_item">
+      <img src="{{ data.image.url }}" alt="post" width="150" height="80" />
+      <div class="media-body">
+        <a href="{% url 'post-details' data.pk %}"><h3>{{ data.title|truncatechars:30 }}</h3></a>
+        <p>{{ data.published_at|date:'F j, Y' }}</p>
+      </div>
+    </div>
+  {% empty %}
+    <p>No published posts available.</p>
+  {% endfor %}
+</aside>

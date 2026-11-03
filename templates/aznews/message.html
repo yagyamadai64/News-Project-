@@ -1,0 +1,9 @@
+{% if messages %}
+{% for data in messages %}
+{% if message_type in data.tags %}
+<div class="alert alert-{% if data.tags == 'error' %}danger{%else%}success{%endif%}" role="alert">
+     <p>{{data}}</p>
+</div>
+{% endif %}
+{% endfor %}
+{% endif %}

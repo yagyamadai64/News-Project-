@@ -1,0 +1,74 @@
+{% extends 'admindashboard/base.html' %} {% block content %}
+<div class="px-6 py-12">
+  <div
+    class="mx-auto bg-white border border-gray-200 rounded-2xl transition duration-300 overflow-hidden"
+  >
+    <div class="px-8 pt-10 pb-6 border-b border-gray-100">
+      <div class="h-52 overflow-hidden">
+        <img
+          src="{{ post.image.url }}"
+          alt="{{ post.title }}"
+          class="w-full h-full object-cover hover:scale-105 transition duration-300"
+        />
+      </div>
+      <h1 class="text-4xl font-bold text-gray-800 mb-4">{{ post.title }}</h1>
+      <div class="text-gray-500 text-sm space-y-1">
+        <p>
+          <span class="font-medium text-gray-700 capitalize">Author:</span> @{{
+          post.author }}
+        </p>
+        <p>
+          <span class="font-medium text-gray-700">Published:</span> {{
+          post.published_at|date:'F j, Y' }}
+        </p>
+      </div>
+    </div>
+
+    <div class="px-8 py-8 text-gray-700 leading-relaxed">
+      <p class="whitespace-pre-line">{{ post.content }}</p>
+    </div>
+
+    <div
+      class="px-8 py-6 bg-gray-50 border-t border-gray-100 flex flex-wrap justify-between items-center gap-4"
+    >
+      <a href="{% url 'news_admin:post_list' %}" class="inline-block"
+        ><button
+          class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-2 px-5 rounded-lg transition duration-200"
+        >
+          Back to Posts
+        </button></a
+      >
+      {% if user.is_authenticated and user == post.author %}
+      <div class="flex gap-3">
+        <a href="{% url 'news_admin:post_unpublished' post.id %}"
+          ><button
+            class="bg-green-600 hover:bg-green-800 text-white font-medium py-2 px-5 rounded-lg shadow-sm transition duration-200"
+          >
+            Un-Published
+          </button></a
+        >
+
+        <a href="{% url 'news_admin:post_update' post.id %}"
+          ><button
+            class="bg-yellow-600 hover:bg-yellow-800 text-white font-medium py-2 px-5 rounded-lg shadow-sm transition duration-200"
+          >
+            Edit
+          </button></a
+        >
+        <a
+          href="{% url 'news_admin:post_delete' post.id %}"
+          onclick="
+            return confirm('Are you sure you want to delete this post?');
+          "
+          ><button
+            class="bg-red-600 hover:bg-red-800 text-white font-medium py-2 px-5 rounded-lg shadow-sm transition duration-200"
+          >
+            Delete
+          </button></a
+        >
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

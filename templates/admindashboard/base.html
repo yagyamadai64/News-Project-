@@ -1,0 +1,66 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %} Post App {% endblock %}</title>
+    <script src="{% static 'newsadmin/js/tailwind.js' %}"></script>
+  </head>
+  <body>
+    <nav class="bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16">
+          <!-- Logo -->
+          <div class="flex-shrink-0 flex items-center">
+            <a
+              href="{% url 'news_admin:post_list' %}"
+              class="text-xl font-bold text-blue-600"
+            >
+              <img
+                src="{% static 'newsadmin/img/Logo.png' %}"
+                alt="logo"
+                class="w-8 h-6 inline-block align-middle mr-2"
+              />
+              MyLogo
+            </a>
+          </div>
+          <div class="p-5 flex flex-col justify-center h-full">
+            {% if user.is_authenticated %}
+            <div class="flex gap-3 items-center">
+              <a
+                href="{% url 'news_admin:draft_list' %}"
+                class="text-blue-500 hover:underline duration-300"
+                >Draft</a
+              >
+              <a
+                href="{% url 'news_admin:post_create' %}"
+                class="text-blue-500 hover:underline duration-300"
+                >Create</a
+              >
+              <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button
+                  class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-200 w-full ml-2"
+                >
+                  LogOut
+                </button>
+              </form>
+            </div>
+            {% else %}
+            <a href="{% url 'login' %}"
+              ><button
+                class="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-200 w-full ml-2"
+              >
+                Login
+              </button></a
+            >
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    {% block content %} {% endblock %}
+  </body>
+</html>

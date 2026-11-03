@@ -1,0 +1,15 @@
+{% load static %}
+<div class="blog-author">
+  <div class="media align-items-center">
+    {% if post.author.userprofile.image.url %}
+      <img src="{{ post.author.userprofile.image.url }}" alt="" />
+    {% else %}
+      <img src="{% static 'aznews/assets/img/blog/author.png' %}" alt="" />
+    {% endif %}
+
+    <div class="media-body">
+      <a href="#"><h4>{{ post.author.get_full_name|default:post.author.username }}</h4></a>
+      <p>{{ post.author.userprofile.bio|default:'Author at AZ News' }}</p>
+    </div>
+  </div>
+</div>
